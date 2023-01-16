@@ -18,10 +18,15 @@ node('') {
 	stage ('Archive Artifacts'){
 		archiveArtifacts artifacts: 'target/*.war'
 	}
+	stage('Docker Build'){
+        sh ' docker --version '
+        sh ' docker build -t mavenbuild . '
+    }
+    stage('Create Container '){
+        sh ' docker run -d -p 9000:8080  --name dockercontainer mavenbuild '
+    }
 	
-	stage ('Deployment'){
-		ansiblePlaybook colorized: true, disableHostKeyChecking: true, playbook: 'deploy.yml'
-	}
+	
 	
 	stage ('Notification'){
 		emailext (
@@ -29,5 +34,8 @@ node('') {
 		      body: "Jenkins Pipeline Job for Maven Build got completed !!!",
 		      to: "build-alerts@example.com"
 		    )
+	}
+	stage ('Deployment'){
+		ansiblePlaybook colorized: true, disableHostKeyChecking: true, playbook: 'deploy.yml'
 	}
 }
