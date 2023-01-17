@@ -2,7 +2,7 @@ def containerName="mavenbuild"
 def tag="latest"
 def dockerHubUser="supriyagowda17"
 def httpPort="8090" 
-node('') {
+node{
 	stage ('checkout code'){
 		git credentialsId: '2aba396a-b26a-46c3-960b-d5d1ad46a797', url: 'https://github.com/supriyagowda17/MavenBuild.git'
 		checkout scm
