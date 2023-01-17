@@ -1,3 +1,7 @@
+def containerName="mavenbuild"
+def tag="latest"
+def dockerHubUser="supriyagowda17"
+def httpPort="8090" 
 node('') {
 	stage ('checkout code'){
 		checkout scm
@@ -12,11 +16,11 @@ node('') {
 	}
 
 	stage ('Sonar Analysis'){
-		//sh 'mvn sonar:sonar -Dsonar.host.url=http://http://20.84.144.34:9000/ -Dsonar.login=ab82c41e2cf6565aa1faf6d437423c576c5ba792'
+		//sh 'mvn sonar:sonar -Dsonar.host.url=http://20.84.144.34:9000/ -Dsonar.login=ab82c41e2cf6565aa1faf6d437423c576c5ba792'
 	}
 
 	stage ('Archive Artifacts'){
-		archiveArtifacts artifacts: 'target/*.war'
+		//archiveArtifacts artifacts: 'target/*.war'
 	}
 	stage('Docker Build'){
         sh ' docker --version '
