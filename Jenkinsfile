@@ -5,7 +5,6 @@ def httpPort="8090"
 node{
 	stage ('checkout code'){
 		git credentialsId: '2aba396a-b26a-46c3-960b-d5d1ad46a797', url: 'https://github.com/supriyagowda17/MavenBuild.git'
-		checkout scm
 	}
 	
 	stage ('Build'){
@@ -19,6 +18,10 @@ node{
 	stage ('Sonar Analysis'){
 		//sh 'mvn sonar:sonar -Dsonar.host.url=http://20.84.144.34:9000/ -Dsonar.login=ab82c41e2cf6565aa1faf6d437423c576c5ba792'
 	}
+	
+	 stage ('Archive Artifacts'){
+//         archiveArtifacts artifacts: 'target/*.war'
+    }
 
 	 stage("Image Prune"){
          sh "docker image prune -a -f"
