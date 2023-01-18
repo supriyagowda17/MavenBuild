@@ -43,7 +43,7 @@ node{
         node('KubernetesMaster'){
             stage('Run App'){
                     sh """
-              kubectl create deployment kubernetes-.bootcamp --image=docker.io/supriyagowda17/$containerName:$tag --port=8090
+              kubectl create deployment kubernetes-bootcamp1 --image=docker.io/supriyagowda17/$containerName:$tag --port=8090
                        kubectl get pods
                     """
                 }
